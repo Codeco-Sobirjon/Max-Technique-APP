@@ -103,8 +103,8 @@ class SeoDetails(models.Model):
     keywords = models.CharField(max_length=255, blank=True, help_text="Кома-разделенный список SEO-ключевых слов.")
 
     class Meta:
-        verbose_name = "SEO-детали"
-        verbose_name_plural = "SEO-детали"
+        verbose_name = "5. SEO-детали"
+        verbose_name_plural = "5. SEO-детали"
 
     def __str__(self):
         return self.title
