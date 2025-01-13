@@ -9,10 +9,10 @@ from apps.conf_site.models import (
     Service,
     ServiceCarousel,
     PlaceOrder,
-    PlaceOrderService, ServiceName, SeoDetails
+    PlaceOrderService, ServiceName, SeoDetails, Contacts
 )
 from apps.conf_site.serializers import ServiceCarouselListSerializer, ServiceListSerializer, PlaceOrderListSerializer, \
-    SeoDetailsSerializer
+    SeoDetailsSerializer, ContactsSerializer
 
 
 class ServiceCarouselListAPIView(APIView):
@@ -86,3 +86,19 @@ class SeoDetailsListView(APIView):
         seo_details = SeoDetails.objects.all()
         serializer = SeoDetailsSerializer(seo_details, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class ContactsListView(APIView):
+    permission_classes = [AllowAny]
+
+    @swagger_auto_schema(
+        tags=['Contact Information'],
+        operation_description="Retrieve a list of all contact info",
+        responses={200: ContactsSerializer(many=True)},
+    )
+    def get(self, request):
+        queryset = Contacts.objects.all()
+        serializer = ContactsSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+

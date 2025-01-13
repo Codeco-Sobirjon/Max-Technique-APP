@@ -108,3 +108,18 @@ class SeoDetails(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Contacts(models.Model):
+    title = models.CharField(max_length=255, help_text="Заголовок")
+    email = models.EmailField(null=True, blank=True, verbose_name="Электронная почта")
+    phone = models.CharField(max_length=20, null=True, blank=True, verbose_name="Телефон")
+
+    objects = models.Manager()
+
+    class Meta:
+        verbose_name = "4. Контакная информация"
+        verbose_name_plural = "4. Контакная информация"
+
+    def __str__(self):
+        return self.title

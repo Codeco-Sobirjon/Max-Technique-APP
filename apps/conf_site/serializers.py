@@ -6,7 +6,7 @@ from apps.conf_site.models import (
     ServiceCarousel,
     PlaceOrder,
     PlaceOrderService, ServiceName, SeoDetails,
-    RequirementService
+    RequirementService, Contacts
 )
 
 
@@ -78,3 +78,11 @@ class SeoDetailsSerializer(serializers.ModelSerializer):
             'id', 'title', 'description', 'keywords'
         ]
 
+
+class ContactsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Contacts
+        fields = [
+            'id', 'title', 'email', 'phone',
+        ]
