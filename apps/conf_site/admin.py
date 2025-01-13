@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.db import models
 from django.utils.translation import gettext as _
 from apps.conf_site.models import ServiceCarousel, ServiceName, PlaceOrder, PlaceOrderService, Service, SeoDetails, \
-    RequirementService
+    RequirementService, Contacts
 
 
 # @admin.register(ServiceName)
@@ -64,3 +64,8 @@ class ServiceAdmin(admin.ModelAdmin):
 @admin.register(SeoDetails)
 class SeoDetailsAdmin(admin.ModelAdmin):
     list_display = ['title', 'keywords']
+
+
+@admin.register(Contacts)
+class ContactsAdmin(admin.ModelAdmin):
+    list_display = ['title', 'email', 'phone']
