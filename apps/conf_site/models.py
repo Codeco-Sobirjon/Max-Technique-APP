@@ -111,7 +111,7 @@ class SeoDetails(models.Model):
 
 
 class Contacts(models.Model):
-    title = models.CharField(max_length=255, help_text="Заголовок")
+    title = models.CharField(max_length=255, verbose_name="Заголовок")
     email = models.EmailField(null=True, blank=True, verbose_name="Электронная почта")
     phone = models.CharField(max_length=20, null=True, blank=True, verbose_name="Телефон")
 
