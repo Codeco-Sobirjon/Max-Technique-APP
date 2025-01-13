@@ -5,7 +5,8 @@ from apps.conf_site.models import (
     Service,
     ServiceCarousel,
     PlaceOrder,
-    PlaceOrderService, ServiceName, SeoDetails
+    PlaceOrderService, ServiceName, SeoDetails,
+    RequirementService
 )
 
 
@@ -13,6 +14,13 @@ class ServiceNameListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ServiceName
+        fields = ['id', 'name']
+
+
+class RequirementServiceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = RequirementService
         fields = ['id', 'name']
 
 
@@ -26,12 +34,20 @@ class ServiceCarouselListSerializer(serializers.ModelSerializer):
 
 
 class ServiceListSerializer(serializers.ModelSerializer):
+    requirement_list = serializers.SerializerMethodField()
 
     class Meta:
         model = Service
         fields = [
-            'id', 'name', 'description'
+            'id', 'name', 'description', 'requirement_list'
         ]
+
+    def get_requirement_list(self, obj):
+        instance = RequirementService.objects.select_related('service').filter(
+            service=obj
+        )
+        serializer = RequirementServiceSerializer(instance, many=True)
+        return serializer.data
 
 
 class PlaceOrderListSerializer(serializers.ModelSerializer):

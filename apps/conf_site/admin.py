@@ -1,7 +1,10 @@
+from django import forms
 from django.contrib import admin
 from django.contrib.auth.models import Group
+from django.db import models
 from django.utils.translation import gettext as _
-from apps.conf_site.models import ServiceCarousel, ServiceName, PlaceOrder, PlaceOrderService, Service, SeoDetails
+from apps.conf_site.models import ServiceCarousel, ServiceName, PlaceOrder, PlaceOrderService, Service, SeoDetails, \
+    RequirementService
 
 
 # @admin.register(ServiceName)
@@ -42,12 +45,22 @@ class PlaceOrderAdmin(admin.ModelAdmin):
     inlines = [PlaceOrderServiceTabularInline]
 
 
+class RequirementServiceTabularInline(admin.TabularInline):
+    model = RequirementService
+    extra = 1
+    fields = ['name']
+
+    formfield_overrides = {
+        models.CharField: {'widget': forms.Textarea(attrs={'cols': 40, 'rows': 3})}
+    }
+
+
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ['name', 'created_at']
+    inlines = [RequirementServiceTabularInline]
 
 
 @admin.register(SeoDetails)
 class SeoDetailsAdmin(admin.ModelAdmin):
     list_display = ['title', 'keywords']
-

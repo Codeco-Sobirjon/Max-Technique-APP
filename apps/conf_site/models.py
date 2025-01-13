@@ -36,7 +36,7 @@ class ServiceCarousel(models.Model):
 
 class Service(models.Model):
     name = models.CharField(max_length=500, null=True, blank=True, verbose_name="Название услуга")
-    description = CKEditor5Field(config_name='extends', verbose_name="Краткое описание")
+    description = models.TextField(null=True, blank=True, verbose_name="Краткое описание")
     created_at = models.DateField(auto_now_add=True, null=True, blank=True, verbose_name="Дата публикации")
 
     objects = models.Manager()
@@ -48,6 +48,21 @@ class Service(models.Model):
         ordering = ["-id"]
         verbose_name = _("2. Услугм")
         verbose_name_plural = _("2. Услуги")
+
+
+class RequirementService(models.Model):
+    name = models.CharField(max_length=250, null=True, blank=True, verbose_name="Краткое описание")
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, blank=True,
+                                verbose_name="Услугм", related_name="service_req")
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _("Требование к обслуживанию")
+        verbose_name_plural = _("Требование к обслуживанию")
 
 
 class PlaceOrder(models.Model):
