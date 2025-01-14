@@ -98,9 +98,9 @@ class PlaceOrderService(models.Model):
 
 
 class SeoDetails(models.Model):
-    title = models.CharField(max_length=255, help_text="SEO-заголовок для страницы или поста.")
-    description = models.TextField(help_text="SEO-описание для страницы или поста, обычно около 150-160 символов.")
-    keywords = models.CharField(max_length=255, blank=True, help_text="Кома-разделенный список SEO-ключевых слов.")
+    title = models.CharField(max_length=255, verbose_name="SEO-заголовок для страницы или поста.")
+    description = models.TextField(verbose_name="SEO-описание для страницы или поста, обычно около 150-160 символов.")
+    keywords = models.CharField(max_length=255, blank=True, verbose_name="Кома-разделенный список SEO-ключевых слов.")
 
     class Meta:
         verbose_name = "5. SEO-детали"
