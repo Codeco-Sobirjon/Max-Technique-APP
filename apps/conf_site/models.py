@@ -4,7 +4,7 @@ from django.utils.translation import gettext as _
 
 
 class ServiceName(models.Model):
-    name = models.CharField(max_length=250, null=True, blank=True)
+    name = models.CharField(max_length=250, null=True, blank=True, verbose_name="Карусельный раздел на сайте")
 
     objects = models.Manager()
 
@@ -12,14 +12,17 @@ class ServiceName(models.Model):
         verbose_name = 'Услуги'
         verbose_name_plural = 'Услуги'
 
+    def __str__(self):
+        return self.name
+
 
 class ServiceCarousel(models.Model):
-    image = models.ImageField(upload_to='service/', null=True, blank=True, verbose_name="Изображение")
+    image = models.ImageField(upload_to='service/', null=False, blank=False, verbose_name="Изображение")
     service_name = models.ForeignKey(ServiceName, on_delete=models.CASCADE, null=True, blank=True,
                                      verbose_name="Услуга", related_name="service_name")
 
     def __str__(self):
-        return self.service_name.name
+        return f"Название раздел {self.service_name.name} : {self.id}"
 
     def save(self, *args, **kwargs):
 
@@ -39,8 +42,8 @@ class ServiceCarousel(models.Model):
 
 
 class Service(models.Model):
-    name = models.CharField(max_length=500, null=True, blank=True, verbose_name="название услуги")
-    description = models.TextField(null=True, blank=True, verbose_name="Краткое описание")
+    name = models.CharField(max_length=500, null=False, blank=False, verbose_name="Название услуги")
+    description = models.TextField(null=True, blank=False, verbose_name="Краткое описание")
     created_at = models.DateField(auto_now_add=True, null=True, blank=True, verbose_name="Дата публикации")
 
     objects = models.Manager()
@@ -55,8 +58,8 @@ class Service(models.Model):
 
 
 class RequirementService(models.Model):
-    name = models.CharField(max_length=250, null=True, blank=True, verbose_name="Краткое описание")
-    service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, blank=True,
+    name = models.CharField(max_length=250, null=False, blank=False, verbose_name="Краткое описание")
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, null=False, blank=False,
                                 verbose_name="Услугм", related_name="service_req")
 
     objects = models.Manager()
@@ -102,9 +105,11 @@ class PlaceOrderService(models.Model):
 
 
 class SeoDetails(models.Model):
-    title = models.CharField(max_length=255, verbose_name="SEO-заголовок для страницы или поста.")
-    description = models.TextField(verbose_name="SEO-описание для страницы или поста, обычно около 150-160 символов.")
-    keywords = models.CharField(max_length=255, blank=True, verbose_name="SEO-ключевых слов.")
+    title = models.CharField(max_length=255, null=False, blank=False,
+                             verbose_name="SEO-заголовок для страницы или поста.")
+    description = models.TextField(verbose_name="SEO-описание для страницы или поста, обычно около 150-160 символов.",
+                                   null=False, blank=False, )
+    keywords = models.CharField(max_length=255, null=False, blank=False, verbose_name="SEO-ключевых слов.")
 
     class Meta:
         verbose_name = "5. SEO-детали"
@@ -115,7 +120,7 @@ class SeoDetails(models.Model):
 
 
 class Contacts(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Заголовок")
+    title = models.CharField(max_length=255, null=False, blank=False, verbose_name="Заголовок")
     email = models.EmailField(null=True, blank=True, verbose_name="Электронная почта")
     phone = models.CharField(max_length=20, null=True, blank=True, verbose_name="Телефон")
 

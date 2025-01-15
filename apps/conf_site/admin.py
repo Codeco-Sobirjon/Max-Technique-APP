@@ -6,6 +6,10 @@ from django.utils.translation import gettext as _
 from apps.conf_site.models import ServiceCarousel, ServiceName, PlaceOrder, PlaceOrderService, Service, SeoDetails, \
     RequirementService, Contacts
 
+try:
+    admin.site.unregister(Group)
+except admin.sites.NotRegistered:
+    pass
 
 # @admin.register(ServiceName)
 # class ServiceNameAdmin(admin.ModelAdmin):
@@ -14,7 +18,6 @@ from apps.conf_site.models import ServiceCarousel, ServiceName, PlaceOrder, Plac
 
 @admin.register(ServiceCarousel)
 class ServiceCarouselAdmin(admin.ModelAdmin):
-    list_display = ['id', 'service_name__name']
     fields = ['image']
 
 
