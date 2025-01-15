@@ -78,8 +78,8 @@ class PlaceOrder(models.Model):
 
     class Meta:
         ordering = ["-id"]
-        verbose_name = _("3. Разместить заказ")
-        verbose_name_plural = _("3. Разместить заказ")
+        verbose_name = _("3. Заявки")
+        verbose_name_plural = _("3. Заявки")
 
 
 class PlaceOrderService(models.Model):
