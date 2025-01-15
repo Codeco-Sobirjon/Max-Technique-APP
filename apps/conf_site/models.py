@@ -8,6 +8,10 @@ class ServiceName(models.Model):
 
     objects = models.Manager()
 
+    class Meta:
+        verbose_name = 'Услуги'
+        verbose_name_plural = 'Услуги'
+
 
 class ServiceCarousel(models.Model):
     image = models.ImageField(upload_to='service/', null=True, blank=True, verbose_name="Изображение")
@@ -35,7 +39,7 @@ class ServiceCarousel(models.Model):
 
 
 class Service(models.Model):
-    name = models.CharField(max_length=500, null=True, blank=True, verbose_name="Название услуга")
+    name = models.CharField(max_length=500, null=True, blank=True, verbose_name="название услуги")
     description = models.TextField(null=True, blank=True, verbose_name="Краткое описание")
     created_at = models.DateField(auto_now_add=True, null=True, blank=True, verbose_name="Дата публикации")
 
@@ -46,7 +50,7 @@ class Service(models.Model):
 
     class Meta:
         ordering = ["-id"]
-        verbose_name = _("2. Услугм")
+        verbose_name = _("2. Услуги")
         verbose_name_plural = _("2. Услуги")
 
 
@@ -100,7 +104,7 @@ class PlaceOrderService(models.Model):
 class SeoDetails(models.Model):
     title = models.CharField(max_length=255, verbose_name="SEO-заголовок для страницы или поста.")
     description = models.TextField(verbose_name="SEO-описание для страницы или поста, обычно около 150-160 символов.")
-    keywords = models.CharField(max_length=255, blank=True, verbose_name="Кома-разделенный список SEO-ключевых слов.")
+    keywords = models.CharField(max_length=255, blank=True, verbose_name="SEO-ключевых слов.")
 
     class Meta:
         verbose_name = "5. SEO-детали"

@@ -69,3 +69,9 @@ class SeoDetailsAdmin(admin.ModelAdmin):
 @admin.register(Contacts)
 class ContactsAdmin(admin.ModelAdmin):
     list_display = ['title', 'email', 'phone']
+
+
+admin.site.site_header = "Панель администратора"
+admin.site.site_title = "Мой административный портал"
+admin.site.index_title = "Добро пожаловать в панель управление"
+
