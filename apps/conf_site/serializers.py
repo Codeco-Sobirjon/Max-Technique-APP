@@ -52,7 +52,7 @@ class ServiceListSerializer(serializers.ModelSerializer):
 
 class PlaceOrderListSerializer(serializers.ModelSerializer):
     service = ServiceListSerializer(read_only=True, many=True)
-    service_list = serializers.ListField(child=serializers.IntegerField(), write_only=True)
+    service_list = serializers.ListField(child=serializers.IntegerField(), write_only=True, required=False)
 
     class Meta:
         model = PlaceOrder
