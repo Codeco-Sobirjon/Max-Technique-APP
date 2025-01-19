@@ -172,23 +172,23 @@ JAZZMIN_SETTINGS = {
 }
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'max_tech',
-#         'USER': 'postgres',
-#         "PASSWORD": "0576",
-#         "HOST": "localhost",
-#         "PORT": 5432,
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'max_tech',
+        'USER': 'postgres',
+        "PASSWORD": "0576",
+        "HOST": "localhost",
+        "PORT": 5432,
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 customColorPalette = [
     {'color': 'hsl(4, 90%, 58%)', 'label': 'Red'},
